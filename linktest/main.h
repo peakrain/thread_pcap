@@ -19,4 +19,9 @@ struct print_data{
 	int packet_len;
 	time_t time;	
 };
+/*function*/
+pcap_t *getdriver();
+struct packet *receive(pcap_t *p);
+struct print_data *analysis(struct packet *data);
+void print(struct print_data *data);
 #endif

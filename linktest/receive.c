@@ -1,10 +1,11 @@
 #include"main.h"
+#include<malloc.h>
 struct packet *receive(pcap_t *p)
 {
 	int err=0;
 	struct pcap_pkthdr *packet_h;
 	const u_char *pack;
-	struct packet *packet=malloc(sizeof(struct packet));
+	struct packet *packet=(struct packet*)malloc(sizeof(struct packet));
 	if(packet!=NULL)
 	{
 		err=pcap_next_ex(p,&packet_h,&pack);

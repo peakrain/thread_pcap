@@ -2,6 +2,7 @@
 #include<netinet/in.h>
 #include<netinet/if_ether.h>
 #include<arpa/inet.h>
+#include<malloc.h>
 struct print_data *analysis(struct packet *p)
 {
 	struct print_data *output=(struct print_data*)malloc(sizeof(struct print_data));
