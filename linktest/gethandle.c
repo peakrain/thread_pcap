@@ -1,12 +1,12 @@
 #include<pcap.h>
 #include<stdlib.h>
-pcap_t *getdriver()
+pcap_t *gethandle()
 {
 	char ebuf[PCAP_ERRBUF_SIZE];
 	char *device;
-	pcap_t *driver=NULL;
-	driver=(pcap_t *)malloc(sizeof(pcap_t*));
-	if(driver!=NULL)
+	pcap_t *handle=NULL;
+	handle=(pcap_t *)malloc(sizeof(pcap_t*));
+	if(handle!=NULL)
 	{
 		device=pcap_lookupdev(ebuf);
 		if(!device)
@@ -24,8 +24,8 @@ pcap_t *getdriver()
 		}
 		else
 		{
-			driver=p;
-			return driver;
+			handle=p;
+			return handle;
 		}
 	}
 	else

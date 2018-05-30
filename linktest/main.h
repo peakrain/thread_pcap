@@ -20,8 +20,11 @@ struct print_data{
 	time_t time;	
 };
 /*function*/
-pcap_t *getdriver();
+pcap_t *gethandle();
 struct packet *receive(pcap_t *p);
 struct print_data *analysis(struct packet *data);
 void print(struct print_data *data);
+void *receive_packet(void *arg);
+void *analysis_packet(void *arg);
+void *print_data(void *arg);
 #endif

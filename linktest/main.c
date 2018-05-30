@@ -1,8 +1,10 @@
 #include"main.h"
+#include<malloc.h>
+pcap_t *driver;
 int main()
 {
 	
-	pcap_t *p=getdriver();
+	pcap_t *p=gethandle();
 	struct pcap_pkthdr *packet_h;
 	const u_char *packet;
 	int count=0;
@@ -16,7 +18,8 @@ int main()
 			count++;
 			printf("get packet %d\n",count);
 			struct print_data *data=analysis(pack);
-			print(data);	
+			print(data);
+			free(data);	
 		}
 	}
 	
