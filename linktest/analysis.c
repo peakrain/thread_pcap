@@ -1,9 +1,10 @@
 #include"main.h"
 #include<netinet/in.h>
 #include<netinet/if_ether.h>
+#include<arpa/inet.h>
 struct print_data *analysis(struct packet *p)
 {
-	struct print_data *output=malloc(sizeof(struct print_data *));
+	struct print_data *output=(struct print_data*)malloc(sizeof(struct print_data));
 	/*analysis ip header*/
 	struct in_addr addr;
 	struct iphdr *ip_h=(struct iphdr*)(p->packet+sizeof(struct ether_header));

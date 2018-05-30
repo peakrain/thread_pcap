@@ -15,9 +15,8 @@ int main()
 		{
 			count++;
 			printf("get packet %d\n",count);
-			analysis(pack);
-			//printf("%d\n",print->sourceport);
-			
+			struct print_data *data=analysis(pack);
+			print(data);	
 		}
 	}
 	

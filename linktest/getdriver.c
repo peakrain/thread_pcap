@@ -5,7 +5,7 @@ pcap_t *getdriver()
 	char ebuf[PCAP_ERRBUF_SIZE];
 	char *device;
 	pcap_t *driver=NULL;
-	driver=malloc(sizeof(pcap_t*));
+	driver=(pcap_t *)malloc(sizeof(pcap_t*));
 	if(driver!=NULL)
 	{
 		device=pcap_lookupdev(ebuf);
