@@ -1,4 +1,4 @@
-main:main.o gethandle.o receive.o analysis.o  print.o
-	gcc -o main main.o gethandle.o receive.o analysis.o print.o -lpcap
+main:main.o packet.o
+	gcc -o main main.o packet.o -lpcap
 clean:
-	rm -f main.o gethandle.o receive.o analysis.o print.o
+	rm -f main.o packet.o

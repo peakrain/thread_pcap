@@ -4,26 +4,24 @@ pcap_t *driver;
 int main()
 {
 	
-	pcap_t *p=gethandle();
-	struct pcap_pkthdr *packet_h;
-	const u_char *packet;
+	handle=gethandle();
 	int count=0;
 	while(count<10)
 	{
-		struct packet *pack=receive(p);
-		if(pack==NULL)
+		packet_data=receive(handle);
+		if(packet_data==NULL)
 			printf("Error!\n");
 		else
 		{
 			count++;
 			printf("get packet %d\n",count);
-			struct print_data *data=analysis(pack);
-			print(data);
-			free(data);	
+			info=analysis(packet_data);
+			info_print(info);
+			free(info);	
 		}
 	}
 	
-	pcap_close(p);
+	pcap_close(handle);
 	return 0;
 
 }

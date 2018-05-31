@@ -1,30 +1,11 @@
 #ifndef _main_h
 #define _main_h
 
+#include"packet.h"
 #include<stdio.h>
-#include<pcap.h>
-#include<linux/ip.h>
-#include<linux/tcp.h>
-#include<time.h>
-struct packet{
-	struct pcap_pkthdr *packet_h;
-	const u_char *packet;
-};
-struct print_data{
-	char *sourceip;
-	char *destip;
-	int sourceport;
-	int destport;
-	int protocol;
-	int packet_len;
-	time_t time;	
-};
+
+pcap_t *handle;
+struct packet *packet_data;
+struct packet_info *info;
 /*function*/
-pcap_t *gethandle();
-struct packet *receive(pcap_t *p);
-struct print_data *analysis(struct packet *data);
-void print(struct print_data *data);
-void *receive_packet(void *arg);
-void *analysis_packet(void *arg);
-void *print_data(void *arg);
 #endif
