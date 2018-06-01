@@ -14,12 +14,11 @@ void *packet_receive(void *arg)
 		pthread_mutex_lock(&r_mutex);
 		while(packet_data!=NULL)
 		{
-			printf("the packet hasn't be analyzed, wait...\n ");
 			pthread_cond_wait(&r_cond,&r_mutex);
+			
 		}
 		while(packet_data==NULL)
 			packet_data=receive(handle);
-		printf("get a packet\n");	
 		pthread_cond_signal(&ra_cond);
 		pthread_mutex_unlock(&r_mutex);
 	}
@@ -34,21 +33,18 @@ void *packet_analysis(void *arg)
 		pthread_mutex_lock(&r_mutex);
 		while(packet_data==NULL)
 		{
-			printf("no packet can't be analyzed,waint...\n");
 			pthread_cond_wait(&ra_cond,&r_mutex);
 		}
 		pthread_mutex_lock(&p_mutex);
 		while(info!=NULL)
 		{
-			printf("information hasn't print,wait...\n");
 			pthread_cond_wait(&ap_cond,&p_mutex);
 		}
-		printf("analyze packet...\n");
 		info=analysis(packet_data);
-		packet_data==NULL;
-		pthread_cond_signal(&r_cond);
+		packet_data=NULL;
 		pthread_cond_signal(&p_cond);
 		pthread_mutex_unlock(&p_mutex);
+		pthread_cond_signal(&r_cond);
 		pthread_mutex_unlock(&r_mutex);
 	}	
 	return (void*)2;
@@ -60,10 +56,8 @@ void *packet_printout(void *arg)
 		pthread_mutex_lock(&p_mutex);
 		while(info==NULL)
 		{
-			printf("no information can't print,waint...\n");
 			pthread_cond_wait(&p_cond,&p_mutex);
 		}
-		printf("print packet information...\n");
 		info_print(info);
 		info=NULL;
 		pthread_cond_signal(&ap_cond);
